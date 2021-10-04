@@ -1,0 +1,48 @@
+* {
+    font-family: monospace;
+}
+
+body {
+    background-color: mediumorchid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main * {
+    padding: 10px;
+    margin: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: mediumvioletred solid 5px;
+}
+
+#guess-results {
+    border: none;
+}
+
+#reset-button {
+    display: none;
+}
+
+#wins-losses {
+    background-color: mediumpurple;
+    border-radius: 8px;
+    /* display:none; */
+}
+
+th, td {
+    background-color: mediumorchid;
+    font-size: 1.5rem;
+    color: mediumspringgreen;
+    border-radius: 8px;
+}
+
+#guess-results {
+    font-size: 1.5rem;
+    color: mediumorchid;
+}
+
+input, button {
+    border-radius: 8px;
+}
