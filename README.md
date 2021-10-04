@@ -8,6 +8,7 @@
 * Button to submit guess -- static
 * Result display -- dynamic
 * Try Again Button -- static
+* Total Wins and Losses display -- dynamic
 
 ### State
 * user guess -- value of te input field
@@ -17,11 +18,13 @@
   * correct -- guess = randNum
   * too high -- guess > randNum
   * too low -- guess < randNum
-  * invald -- guess > 20 OR 'Not A Number'
+  * invalid -- guess > 20 OR 'Not A Number'
+* total wins and losses -- keep track of how many times user has won or lost in a session.
 
 ### PseudoCode for Event
 ```
 // What events am I listening for?
+//
 // on button click:
 //    decrement guess count (if counting down from 4)
 //    get user input value, CONVERT TO NUMBER
@@ -29,7 +32,11 @@
 //    if -- user input === randNum -- display "You Won!"
 //    else if -- number of guesses === 4 -- display "You Lost. Out of Guesses."
 //    else if -- user input > randNum -- display "Guess too high"
-//    else if -- user input < randNum -- display " Guess too low"
+//    else if -- user input < randNum -- display " Guess too low
+//        on Win or Loss:
+//            get outcome of most recent game
+//            if -- won -- increment Total wins
+//            if -- loss -- increment Total losses
 ```
 
 ## General Steps to Planning an App
