@@ -21,7 +21,7 @@ main * {
     border: none;
 }
 
-#guess-button:hover, #reset-button:hover {
+button:hover {
     cursor: pointer;
 }
 
@@ -32,7 +32,8 @@ main * {
 #wins-losses {
     background-color: mediumpurple;
     border-radius: 8px;
-    display:none;
+    display: none;
+    margin: 30px auto 20px auto;
 }
 
 th, td {
@@ -49,4 +50,5 @@ th, td {
 
 input, button {
     border-radius: 8px;
+    margin-bottom: 30px;
 }
