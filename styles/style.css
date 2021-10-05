@@ -21,6 +21,10 @@ main * {
     border: none;
 }
 
+#guess-button:hover {
+    cursor: pointer;
+}
+
 #reset-button {
     display: none;
 }
@@ -28,7 +32,7 @@ main * {
 #wins-losses {
     background-color: mediumpurple;
     border-radius: 8px;
-    /* display:none; */
+    display:none;
 }
 
 th, td {
