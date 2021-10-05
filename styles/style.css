@@ -9,7 +9,7 @@ body {
     align-items: center;
 }
 
-main * {
+main *, footer * {
     padding: 10px;
     margin: 10px;
     font-weight: 600;
