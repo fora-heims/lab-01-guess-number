@@ -7,12 +7,12 @@ const table = document.getElementById('wins-losses');
 let wins = document.getElementById('wins');
 let losses = document.getElementById('losses');
 const score = document.getElementById('score-button');
+const timerButton = document.getElementById('timer-button');
+const timerDisplay = document.getElementById('timer-display');
 
 // initialize global state
 let rndNum = Math.floor(Math.random() * 20) + 1;
 let attempt = 0;
-
-console.log(rndNum);
 
 function invalidInput() {
     let message = `Input invalid. You have ${4 - attempt} attempts left.`;
@@ -69,12 +69,17 @@ function restartGame() {
     hideScore();
 }
 
+function showScore() {
+    table.style.display = 'table';
+    score.textContent = 'Hide Score';
+}
+
 // Add event listeners
 guess.addEventListener('click', () => {
     attempt++;
     results.style.display = 'inline';
     let num = Number(input.value);
-    if (num > 20 || isNaN(num) === 'true') {
+    if (num > 20 || isNaN(num) === true || num <= 0) {
         invalidInput();
     } else if (num === rndNum) {
         correctGuess();
@@ -93,7 +98,7 @@ window.addEventListener('keyup', (event) => {
             attempt++;
             results.style.display = 'inline';
             let num = Number(input.value);
-            if (num > 20 || isNaN(num) === 'true') {
+            if (num > 20 || isNaN(num) === true || num <= 0) {
                 invalidInput();
             } else if (num === rndNum) {
                 correctGuess();
@@ -116,9 +121,26 @@ replay.addEventListener('click', () => {
 
 score.addEventListener('click', () => {
     if (table.style.display === 'none') {
-        table.style.display = 'table';
-        score.textContent = 'Hide Score';
+        showScore();
     } else {
         hideScore();
     }
 });
+
+let timerCount = 60;
+
+timerButton.addEventListener('click', () => {
+    setInterval(function () {
+        timerCount--;
+        timerDisplay.textContent = timerCount;
+    }, 1000);
+});
+
+//function that starts a counter at 60 and decrements every second using setInterval()
+//clearInterval() for stopping timer
+
+//display timer
+//button to start timer
+//end game when time runs out
+//  alert user of game end
+//  display score
