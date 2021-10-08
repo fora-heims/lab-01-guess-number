@@ -131,16 +131,15 @@ let timerCount = 60;
 
 timerButton.addEventListener('click', () => {
     setInterval(function () {
-        timerCount--;
-        timerDisplay.textContent = timerCount;
+        if (timerCount <= 0) {
+            clearInterval();
+        } else {
+            timerCount--;
+            timerDisplay.textContent = timerCount;
+        }
     }, 1000);
 });
 
-//function that starts a counter at 60 and decrements every second using setInterval()
-//clearInterval() for stopping timer
-
-//display timer
-//button to start timer
 //end game when time runs out
 //  alert user of game end
 //  display score
