@@ -12,81 +12,83 @@ const score = document.getElementById('score-button');
 let rndNum = Math.floor(Math.random() * 20) + 1;
 let attempt = 0;
 
-console.log(wins.textContent);
+console.log(rndNum);
+
+function invalidInput() {
+    let message = `Input invalid. You have ${4 - attempt} attempts left.`;
+    results.textContent = message;
+}
+
+function correctGuess() {
+    let message = 'You Win!';
+    results.textContent = message;
+    let newWins = Number(wins.textContent) + 1;
+    wins.textContent = newWins;
+    replay.style.display = 'block';
+    table.style.display = 'table';
+    score.textContent = 'Hide Score';
+    input.style.display = 'none';
+    guess.style.display = 'none';
+}
+
+function outOfGuesses() {
+    let message = 'Out of attempts. You Lose. Try again.';
+    results.textContent = message;
+    let newLosses = Number(losses.textContent) + 1;
+    losses.textContent = newLosses;
+    replay.style.display = 'block';
+    table.style.display = 'table';
+    score.textContent = 'Hide Score';
+    input.style.display = 'none';
+    guess.style.display = 'none';
+}
+
+function tooHigh() {
+    let message = `Too high. You have ${4 - attempt} attempts left.`;
+    results.textContent = message;
+}
+
+function tooLow() {
+    let message = `Too low. You have ${4 - attempt} attempts left.`;
+    results.textContent = message;
+}
 
 // Add event listeners
-guess.addEventListener('click', ()=> {
+guess.addEventListener('click', () => {
     attempt++;
     results.style.display = 'inline';
     let num = Number(input.value);
     if (num > 20 || isNaN(num) === 'true') {
-        let message = `Input invalid. You have ${4 - attempt} attempts left.`;
-        results.textContent = `${message}`;
+        invalidInput();
     } else if (num === rndNum) {
-        let message = 'You Win!';
-        results.textContent = `${message}`;
-        let newWins = Number(wins.textContent) + 1;
-        wins.textContent = newWins;
-        replay.style.display = 'block';
-        table.style.display = 'table';
-        score.textContent = 'Hide Score';
-        input.style.display = 'none';
-        guess.style.display = 'none';
+        correctGuess();
     } else if (attempt >= 4) {
-        let message = 'Out of attempts. You Lose. Try again.';
-        results.textContent = `${message}`;
-        let newLosses = Number(losses.textContent) + 1;
-        losses.textContent = newLosses;
-        replay.style.display = 'block';
-        table.style.display = 'table';
-        score.textContent = 'Hide Score';
-        input.style.display = 'none';
-        guess.style.display = 'none';
+        outOfGuesses();
     } else if (num > rndNum) {
-        let message = `Too high. You have ${4 - attempt} attempts left.`;
-        results.textContent = `${message}`;
+        tooHigh();
     } else if (num < rndNum) {
-        let message = `Too low. You have ${4 - attempt} attempts left.`;
-        results.textContent = `${message}`;
+        tooLow();
     }
 });
 
-window.addEventListener('keyup', event => {
+window.addEventListener('keyup', (event) => {
     if (event.key === 'Enter') {
         if (input.style.display === 'block') {
             attempt++;
             results.style.display = 'inline';
             let num = Number(input.value);
             if (num > 20 || isNaN(num) === 'true') {
-                let message = `Input invalid. You have ${4 - attempt} attempts left.`;
-                results.textContent = `${message}`;
+                invalidInput();
             } else if (num === rndNum) {
-                let message = 'You Win!';
-                results.textContent = `${message}`;
-                let newWins = Number(wins.textContent) + 1;
-                wins.textContent = newWins;
-                replay.style.display = 'block';
-                table.style.display = 'table';
-                score.textContent = 'Hide Score';
-                input.style.display = 'none';
-                guess.style.display = 'none';
+                correctGuess();
             } else if (attempt >= 4) {
-                let message = 'Out of attempts. You Lose. Try again.';
-                results.textContent = `${message}`;
-                let newLosses = Number(losses.textContent) + 1;
-                losses.textContent = newLosses;
-                replay.style.display = 'block';
-                table.style.display = 'table';
-                score.textContent = 'Hide Score';
-                input.style.display = 'none';
-                guess.style.display = 'none';
+                outOfGuesses();
             } else if (num > rndNum) {
-                let message = `Too high. You have ${4 - attempt} attempts left.`;
-                results.textContent = `${message}`;
+                tooHigh();
             } else if (num < rndNum) {
-                let message = `Too low. You have ${4 - attempt} attempts left.`;
-                results.textContent = `${message}`;
-            }} else {
+                tooLow();
+            }
+        } else {
             attempt = 0;
             rndNum = Math.floor(Math.random() * 20) + 1;
             results.textContent = `You have ${4 - attempt} attempts.`;
