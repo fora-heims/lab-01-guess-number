@@ -53,6 +53,22 @@ function tooLow() {
     results.textContent = message;
 }
 
+function hideScore() {
+    table.style.display = 'none';
+    score.textContent = 'Display Score';
+}
+
+function restartGame() {
+    attempt = 0;
+    rndNum = Math.floor(Math.random() * 20) + 1;
+    results.textContent = `You have ${4 - attempt} attempts.`;
+    replay.style.display = 'none';
+    input.value = '';
+    input.style.display = 'block';
+    guess.style.display = 'block';
+    hideScore();
+}
+
 // Add event listeners
 guess.addEventListener('click', () => {
     attempt++;
@@ -89,28 +105,13 @@ window.addEventListener('keyup', (event) => {
                 tooLow();
             }
         } else {
-            attempt = 0;
-            rndNum = Math.floor(Math.random() * 20) + 1;
-            results.textContent = `You have ${4 - attempt} attempts.`;
-            replay.style.display = 'none';
-            table.style.display = 'none';
-            input.value = '';
-            input.style.display = 'block';
-            guess.style.display = 'block';
+            restartGame();
         }
     }
 });
 
 replay.addEventListener('click', () => {
-    attempt = 0;
-    rndNum = Math.floor(Math.random() * 20) + 1;
-    results.textContent = `You have ${4 - attempt} attempts.`;
-    replay.style.display = 'none';
-    table.style.display = 'none';
-    score.textContent = 'Display Score';
-    input.value = '';
-    input.style.display = 'block';
-    guess.style.display = 'block';
+    restartGame();
 });
 
 score.addEventListener('click', () => {
@@ -118,7 +119,6 @@ score.addEventListener('click', () => {
         table.style.display = 'table';
         score.textContent = 'Hide Score';
     } else {
-        table.style.display = 'none';
-        score.textContent = 'Display Score';
+        hideScore();
     }
 });
