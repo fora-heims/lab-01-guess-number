@@ -130,7 +130,7 @@ score.addEventListener('click', () => {
 let timerCount = 60;
 
 timerButton.addEventListener('click', () => {
-    setInterval(function () {
+    setInterval(function() {
         if (timerCount <= 0) {
             clearInterval();
         } else {

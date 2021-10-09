@@ -13,7 +13,6 @@ describe('Example Test', ()=>{
     describe('user interactions', ()=>{   
         it('score table displayed when Display Score button is clicked', ()=>{
             cy.get('#score-button').click();
-            cy.get('#score-button').click();
             cy.get('#wins-losses').should('be.visible');
         });
     });
