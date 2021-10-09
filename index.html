@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./styles/reset.css">
-    <link rel="stylesheet" href="./styles/style.css">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Guess a Number</h1>
-    <header>
-        <h2>The Rules:</h2>
-        <h3>Guess a number between 1 and 20</h3>
-        <h3>You have four attempts to guess the number correctly</h3>
-        <h3>Reset and try again</h3>
-        <h3>See how many times you can win the game</h3>
-    </header>
-    <main>
-        <input type="text" id="user-input" placeholder="Type Number Here">
-        <button id="guess-button">Submit Guess</button>
-    </main>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="./styles/reset.css" />
+        <link rel="stylesheet" href="./styles/style.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Guess a Number</h1>
+        <header>
+            <h2>The Rules:</h2>
+            <h3>Guess a number between 1 and 20</h3>
+            <h3>You have four attempts to guess the number correctly</h3>
+            <h3>Reset and try again</h3>
+            <h3>See how many times you can win the game</h3>
+        </header>
+        <main>
+            <input type="text" id="user-input" placeholder="Type Number Here" />
+            <button id="guess-button">Submit Guess</button>
+        </main>
         <footer>
             <p id="guess-results">You have 4 attempts left.</p>
             <button id="reset-button">Play Again</button>
             <button id="score-button">Display Score</button>
-            <table id="wins-losses">
+            <button id="timer-button">Button</button>
+            <p id="timer-display"></p>
+            <table id="wins-losses" style="display: none">
                 <thead>
                     <tr>
                         <th>Wins</th>
@@ -41,7 +42,6 @@
                 </tbody>
             </table>
         </footer>
-    <script type="module" src="./app.js"></script>
+        <script type="module" src="./app.js"></script>
     </body>
-
 </html>
