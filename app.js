@@ -14,6 +14,8 @@ const timerReset = document.getElementById('reset-timer');
 // initialize global state
 let rndNum = Math.floor(Math.random() * 20) + 1;
 let attempt = 0;
+let lossCount = 0;
+let winCount = 0;
 
 function invalidInput() {
     let message = `Input invalid. You have ${4 - attempt} attempts left.`;
@@ -24,22 +26,21 @@ function invalidInput() {
 function correctGuess() {
     let message = 'You Win!';
     results.textContent = message;
-    let newWins = Number(wins.textContent) + 1;
+    let newWins = winCount + 1;
     wins.textContent = newWins;
     replay.style.display = 'block';
-    table.style.display = 'table';
     score.textContent = 'Hide Score';
     input.style.display = 'none';
     guess.style.display = 'none';
 }
 
+
 function outOfGuesses() {
     let message = 'Out of attempts. You Lose. Try again.';
     results.textContent = message;
-    let newLosses = Number(losses.textContent) + 1;
+    let newLosses = lossCount + 1;
     losses.textContent = newLosses;
     replay.style.display = 'block';
-    table.style.display = 'table';
     score.textContent = 'Hide Score';
     input.style.display = 'none';
     guess.style.display = 'none';
@@ -57,11 +58,6 @@ function tooLow() {
     input.focus();
 }
 
-function hideScore() {
-    table.style.display = 'none';
-    score.textContent = 'Display Score';
-}
-
 function restartGame() {
     attempt = 0;
     rndNum = Math.floor(Math.random() * 20) + 1;
@@ -70,21 +66,33 @@ function restartGame() {
     input.ariaPlaceholder = 'Type Number Here';
     input.style.display = 'block';
     guess.style.display = 'block';
-    hideScore();
     input.focus();
 }
 
 let timerCount = 60;
 function timerResetF() {
-    let timerCount = 60;
+    timerCount = 60;
+    timerDisplay.textContent = timerCount;
+    input.ariaPlaceholder = 'Type Number Here';
+    input.style.display = 'block';
+    guess.style.display = 'block';
+    input.focus();
+}
+
+function decrementTimer() {
+    timerCount--;
     timerDisplay.textContent = timerCount;
 }
 
-function showScore() {
-    table.style.display = 'table';
-    score.textContent = 'Hide Score';
+function timerEnder() {
+    setInterval(function() {
+        if (timerCount <= 0) {
+            results.textContent = 'Times Up!';
+            guess.style.display = 'none';
+            input.style.display = 'none';
+            clearInterval(intervalID);
+        }}, 1000);
 }
-
 
 // Add event listeners
 guess.addEventListener('click', () => {
@@ -131,32 +139,17 @@ replay.addEventListener('click', () => {
     restartGame();
 });
 
-score.addEventListener('click', () => {
-    if (table.style.display === 'none') {
-        showScore();
-    } else {
-        hideScore();
-    }
-});
-
-
-timerButton.addEventListener('click', () => {
-    restartGame();
-    setInterval(function() {
-        if (timerCount <= 0) {
-            clearInterval();
-        } else {
-            timerCount--;
-            timerDisplay.textContent = timerCount;
-        }
-    }, 1000);
-});
-
 timerReset.addEventListener('click', () => {
     timerResetF();
     wins.textContent = 0;
     losses.textContent = 0;
+    guess.style.display = 'block';
 });
-//end game when time runs out
-//  alert user of game end
-//  display score
+
+let intervalID;
+
+timerButton.addEventListener('click', () => {
+    restartGame();
+    intervalID = setInterval(decrementTimer, 1000);
+    timerEnder();
+});
