@@ -32,7 +32,6 @@ button:hover {
 #wins-losses {
     background-color: mediumpurple;
     border-radius: 8px;
-    display: none;
     margin: 30px auto 20px auto;
 }
 
@@ -51,4 +50,20 @@ th, td {
 input, button {
     border-radius: 8px;
     margin-bottom: 30px;
+}
+
+.time {
+    font-size: 2rem;;
+    width: 100px;
+}
+
+#timer-box * {
+    border: none;
+}
+
+#timer-box {
+    border:midnightblue solid 10px;
+    border-radius: 20px;
+    width:min-content;
+    float: right;
 }
