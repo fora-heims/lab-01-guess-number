@@ -14,9 +14,10 @@
             <h2>The Rules:</h2>
             <h3>Guess a number between 1 and 20</h3>
             <h3>You have four attempts to guess the number correctly</h3>
-            <h3>Press <em>Start the Timer</em> to</h3>
+            <h3>Click <em>Start the Timer</em> to</h3>
             <h3>see how many times you can win the game in 60 seconds</h3>
-            <h3>Press <em>Reset Timer</em> to play another round</h3>
+            <h3>Press <code>Enter</code> to Submit Guess, or click the button</h3>
+            <h3>Click <em>Reset Timer</em> to play another round</h3>
         </header>
         <main>
             <input type="text" id="user-input" placeholder="Type Number Here" autofocus />
@@ -24,7 +25,7 @@
         </main>
         <footer>
             <p id="guess-results">You have 4 attempts left.</p>
-            <button id="reset-button">Play Again</button>
+            <p id="press-enter"></p><button display="none" id="reset-button">Play Again</button>
             <button id="reset-timer">Reset Timer</button>
             <button id="timer-button">Start the Timer</button>
             <div id="timer-box"><p class="time">:<span class="time" id="timer-display">60</span>                

@@ -3,20 +3,22 @@ let input = document.getElementById('user-input');
 const guess = document.getElementById('guess-button');
 const replay = document.getElementById('reset-button');
 const results = document.getElementById('guess-results');
-const table = document.getElementById('wins-losses');
 let wins = document.getElementById('wins');
 let losses = document.getElementById('losses');
-const score = document.getElementById('score-button');
 const timerButton = document.getElementById('timer-button');
 const timerDisplay = document.getElementById('timer-display');
 const timerReset = document.getElementById('reset-timer');
+const pressEnter = document.getElementById('press-enter');
 
 // initialize global state
 let rndNum = Math.floor(Math.random() * 20) + 1;
 let attempt = 0;
 let lossCount = 0;
 let winCount = 0;
+let timerCount = 60;
+replay.style.display = 'none';
 
+// functions
 function invalidInput() {
     let message = `Input invalid. You have ${4 - attempt} attempts left.`;
     results.textContent = message;
@@ -26,24 +28,23 @@ function invalidInput() {
 function correctGuess() {
     let message = 'You Win!';
     results.textContent = message;
-    let newWins = winCount + 1;
-    wins.textContent = newWins;
+    winCount++;
+    wins.textContent = winCount;
     replay.style.display = 'block';
-    score.textContent = 'Hide Score';
     input.style.display = 'none';
     guess.style.display = 'none';
+    pressEnter.textContent = 'Press Enter to ';
 }
 
-
 function outOfGuesses() {
-    let message = 'Out of attempts. You Lose. Try again.';
+    let message = `Out of attempts. Number was ${rndNum}. You Lose. Try again.`;
     results.textContent = message;
-    let newLosses = lossCount + 1;
-    losses.textContent = newLosses;
+    lossCount++;
+    losses.textContent = lossCount;
     replay.style.display = 'block';
-    score.textContent = 'Hide Score';
     input.style.display = 'none';
     guess.style.display = 'none';
+    pressEnter.textContent = 'Press Enter to ';
 }
 
 function tooHigh() {
@@ -67,9 +68,9 @@ function restartGame() {
     input.style.display = 'block';
     guess.style.display = 'block';
     input.focus();
+    pressEnter.textContent = '';
 }
 
-let timerCount = 60;
 function timerResetF() {
     timerCount = 60;
     timerDisplay.textContent = timerCount;
@@ -113,8 +114,9 @@ guess.addEventListener('click', () => {
 });
 
 window.addEventListener('keyup', (event) => {
+    console.log(replay.style.display);
     if (event.key === 'Enter') {
-        if (input.style.display === 'block') {
+        if (replay.style.display === 'none') {
             attempt++;
             results.style.display = 'inline';
             let num = Number(input.value);
@@ -141,8 +143,10 @@ replay.addEventListener('click', () => {
 
 timerReset.addEventListener('click', () => {
     timerResetF();
-    wins.textContent = 0;
-    losses.textContent = 0;
+    winCount = 0;
+    wins.textContent = winCount;
+    lossCount = 0;
+    losses.textContent = lossCount;
     guess.style.display = 'block';
 });
 

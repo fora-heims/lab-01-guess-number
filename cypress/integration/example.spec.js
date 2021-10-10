@@ -5,15 +5,15 @@ describe('Example Test', ()=>{
     });
 
     describe('HTML elements', ()=>{   
-        it('conatains hidden score table', ()=>{
-            cy.get('#wins-losses').should('be.hidden');
+        it('conatains score table', ()=>{
+            cy.get('#wins-losses').should('be.table');
         });
     });
 
     describe('user interactions', ()=>{   
-        it('score table displayed when Display Score button is clicked', ()=>{
-            cy.get('#score-button').click();
-            cy.get('#wins-losses').should('be.visible');
+        it('wins set to 0 when Reset Score button is clicked', ()=>{
+            cy.get('#reset-timer').click();
+            cy.get('#wins').should('be.0');
         });
     });
 });

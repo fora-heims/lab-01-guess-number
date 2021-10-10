@@ -67,3 +67,7 @@ input, button {
     width:min-content;
     float: right;
 }
+
+#press-enter {
+    border: none;
+}
