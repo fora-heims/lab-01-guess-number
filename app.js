@@ -9,6 +9,7 @@ let losses = document.getElementById('losses');
 const score = document.getElementById('score-button');
 const timerButton = document.getElementById('timer-button');
 const timerDisplay = document.getElementById('timer-display');
+const timerReset = document.getElementById('reset-timer');
 
 // initialize global state
 let rndNum = Math.floor(Math.random() * 20) + 1;
@@ -17,6 +18,7 @@ let attempt = 0;
 function invalidInput() {
     let message = `Input invalid. You have ${4 - attempt} attempts left.`;
     results.textContent = message;
+    input.focus();
 }
 
 function correctGuess() {
@@ -46,11 +48,13 @@ function outOfGuesses() {
 function tooHigh() {
     let message = `Too high. You have ${4 - attempt} attempts left.`;
     results.textContent = message;
+    input.focus();
 }
 
 function tooLow() {
     let message = `Too low. You have ${4 - attempt} attempts left.`;
     results.textContent = message;
+    input.focus();
 }
 
 function hideScore() {
@@ -63,10 +67,17 @@ function restartGame() {
     rndNum = Math.floor(Math.random() * 20) + 1;
     results.textContent = `You have ${4 - attempt} attempts.`;
     replay.style.display = 'none';
-    input.value = '';
+    input.ariaPlaceholder = 'Type Number Here';
     input.style.display = 'block';
     guess.style.display = 'block';
     hideScore();
+    input.focus();
+}
+
+let timerCount = 60;
+function timerResetF() {
+    let timerCount = 60;
+    timerDisplay.textContent = timerCount;
 }
 
 function showScore() {
@@ -74,17 +85,18 @@ function showScore() {
     score.textContent = 'Hide Score';
 }
 
+
 // Add event listeners
 guess.addEventListener('click', () => {
     attempt++;
     results.style.display = 'inline';
     let num = Number(input.value);
-    if (num > 20 || isNaN(num) === true || num <= 0) {
+    if (attempt >= 4) {
+        outOfGuesses();
+    } else if (num > 20 || isNaN(num) === true || num <= 0) {
         invalidInput();
     } else if (num === rndNum) {
         correctGuess();
-    } else if (attempt >= 4) {
-        outOfGuesses();
     } else if (num > rndNum) {
         tooHigh();
     } else if (num < rndNum) {
@@ -98,12 +110,12 @@ window.addEventListener('keyup', (event) => {
             attempt++;
             results.style.display = 'inline';
             let num = Number(input.value);
-            if (num > 20 || isNaN(num) === true || num <= 0) {
-                invalidInput();
-            } else if (num === rndNum) {
+            if (num === rndNum) {
                 correctGuess();
             } else if (attempt >= 4) {
                 outOfGuesses();
+            } else if (num > 20 || isNaN(num) === true || num <= 0) {
+                invalidInput();
             } else if (num > rndNum) {
                 tooHigh();
             } else if (num < rndNum) {
@@ -127,9 +139,9 @@ score.addEventListener('click', () => {
     }
 });
 
-let timerCount = 60;
 
 timerButton.addEventListener('click', () => {
+    restartGame();
     setInterval(function() {
         if (timerCount <= 0) {
             clearInterval();
@@ -140,6 +152,11 @@ timerButton.addEventListener('click', () => {
     }, 1000);
 });
 
+timerReset.addEventListener('click', () => {
+    timerResetF();
+    wins.textContent = 0;
+    losses.textContent = 0;
+});
 //end game when time runs out
 //  alert user of game end
 //  display score
